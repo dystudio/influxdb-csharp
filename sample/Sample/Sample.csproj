@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+    <OutputType>exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks>net452;netcoreapp1.0</TargetFrameworks>
+    <AssemblyName>Sample</AssemblyName>
+    <PackageId>Sample</PackageId>
+    <ApplicationIcon />
+    <OutputTypeEx>exe</OutputTypeEx>
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>DEBUG;TRACE;NET452</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\InfluxDB.LineProtocol\InfluxDB.LineProtocol.csproj" />
+    <ProjectReference Include="..\..\src\InfluxDB.Collector\InfluxDB.Collector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+    <PackageReference Include="System.Collections" Version="4.0.11" />
+    <PackageReference Include="System.Console" Version="4.0.0" />
+    <PackageReference Include="System.Linq" Version="4.1.0" />
+    <PackageReference Include="System.Threading" Version="4.0.11" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.0.1" />
+    <PackageReference Include="System.Diagnostics.Process" Version="4.1.0" />
+    <PackageReference Include="System.Threading.Tasks" Version="4.0.11" />
+  </ItemGroup>
+
+</Project>

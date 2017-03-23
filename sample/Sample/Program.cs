@@ -9,21 +9,21 @@ namespace Sample
 {
     public class Program
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
             Collect().Wait();
         }
 
-        async Task Collect()
+        static async Task Collect()
         {
             var process = Process.GetCurrentProcess();
 
             Metrics.Collector = new CollectorConfiguration()
-                .Tag.With("host", Environment.GetEnvironmentVariable("COMPUTERNAME"))
+                .Tag.With("host", Environment.GetEnvironmentVariable("Lenovo-PC"))
                 .Tag.With("os", Environment.GetEnvironmentVariable("OS"))
                 .Tag.With("process", Path.GetFileName(process.MainModule.FileName))
                 .Batch.AtInterval(TimeSpan.FromSeconds(2))
-                .WriteTo.InfluxDB("http://192.168.99.100:8086", "data")
+                .WriteTo.InfluxDB("http://192.168.80.130:8086", "collectd")
                 .CreateCollector();
 
             while (true)
@@ -38,7 +38,7 @@ namespace Sample
                     });
 
                 Metrics.Measure("working_set", process.WorkingSet64);
-
+                Console.WriteLine("write cup_time successfully.");
                 await Task.Delay(1000);
             }
         }
